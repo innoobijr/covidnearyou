@@ -1,27 +1,28 @@
 import { Deck } from "@deck.gl/core";
 import { GeoJsonLayer, ArcLayer } from "@deck.gl/layers";
 import mapboxgl from "mapbox-gl";
+import MapStyleActions from "../../actions/map-style-actions";
 
 class DeckMapController {
-  constructor(mapbox_api) {
+  constructor(mapbox_api, $ngRedux, $scope) {
     this.mapbox_api = mapbox_api;
     //document.getElementById("key").innerText = this.mapbox_api;
+    this.unsubscribe = $ngRedux.connect(this.mapStateToThis, {
+      MapStyleActions,
+    })(this);
+
+    console.log($scope);
+
     const AIR_PORTS =
       "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_airports.geojson";
 
-    const INITIAL_VIEW_STATE = {
-      latitude: 51.47,
-      longitude: 0.45,
-      zoom: 4,
-      bearing: 0,
-      pitch: 30,
-    };
+    const INITIAL_VIEW_STATE = $scope.$ctrl.mapState;
 
     mapboxgl.accessToken = this.mapbox_api;
 
     const map = new mapboxgl.Map({
       container: "map",
-      style: "mapbox://styles/mapbox/light-v9",
+      style: $scope.$ctrl.mapStyle.mapStyles.dark.url, //"mapbox://styles/mapbox/light-v9",
       // Note: deck.gl will be in charge of interaction and event handling
       interactive: false,
       center: [INITIAL_VIEW_STATE.longitude, INITIAL_VIEW_STATE.latitude],
@@ -78,7 +79,15 @@ class DeckMapController {
       ],
     });
   }
+
+  $onDestroy() {
+    this.unsubscribe();
+  }
+  mapStateToThis(state) {
+    //console.log(state);
+    return { mapStyle: state.mapStyle, mapState: state.mapState };
+  }
 }
 
-DeckMapController.$inject = ["mapbox_api"];
+DeckMapController.$inject = ["mapbox_api", "$ngRedux", "$scope"];
 export default DeckMapController;

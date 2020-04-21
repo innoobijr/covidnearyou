@@ -8,6 +8,8 @@ config.output = {
   path: path.resolve(__dirname, "dist"),
 };
 
+//config.mode = "production";
+
 config.plugins = config.plugins.concat([
   new webpack.optimize.UglifyJsPlugin({
     mangle: {

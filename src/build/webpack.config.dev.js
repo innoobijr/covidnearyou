@@ -8,6 +8,8 @@ config.output = {
   path: path.resolve(__dirname, "client"),
 };
 
+config.mode = "development";
+
 config.plugins = config.plugins.concat([
   new webpack.HotModuleReplacementPlugin(),
 ]);
