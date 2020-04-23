@@ -6,23 +6,24 @@ import {
   loadFileSuccess,
 } from "../actions/vis-state-actions";
 
+import { airportPoints } from "../config/layers";
 import { Layer, LayerClasses } from "../layers";
 import { DEFAULT_TEXT_LABEL } from "../layers/layer-factory";
 
 export const INITIAL_VIS_STATE = {
   // map info
   mapInfo: {
-    title: "",
+    title: "micromegas",
     description: "",
   },
   // layers
-  layers: [],
+  layers: [airportPoints],
   layerData: [],
   layerToBeMerged: [],
   layerOrder: [],
   layerBlending: "normal",
   hoverInfo: undefined,
-  clicked: undefined,
+  clicked: true,
   mousePos: {},
   layerClasses: LayerClasses,
 };

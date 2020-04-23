@@ -119,6 +119,7 @@ class MicromegasGl extends Component {
     } = visState;
 
     const mapFields = {
+      preserveDrawingBuffer: true,
       datasets,
       getMapboxRef,
       mapboxApiAccessToken,
@@ -168,7 +169,7 @@ class MicromegasGl extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  console.log(state.visState);
   return {
     mapStyle: state.mapStyle,
     mapState: state.mapState,

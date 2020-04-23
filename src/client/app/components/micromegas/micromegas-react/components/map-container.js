@@ -29,7 +29,7 @@ const MAP_STYLE = {
 const MAPBOXGL_STYLE_UPDATE = "style.load";
 const MAPBOXGL_RENDER = "render";
 const TRANSITION_DURATION = 0;
-
+import { OVERLAY_TYPE } from "../layers/base-layer";
 class MapContainer extends Component {
   static propTypes = {
     //visState: PropTypes.object.isRequired,
@@ -53,6 +53,12 @@ class MapContainer extends Component {
   constructor(props) {
     super(props);
   }
+
+  _onLayerSetDomain = (idx, colorDomain) => {
+    this.props.visStateActions.layerConfigChange(this.props.layers[idx], {
+      colorDomain,
+    });
+  };
 
   _onViewportChange = (viewState) => {
     if (typeof this.props.onViewStateChange === "function") {
@@ -115,6 +121,73 @@ class MapContainer extends Component {
     }
   };
 
+  _renderLayer = (overlays, idx) => {
+    const { datasets, layers, layerData, mapState } = this.props;
+
+    const layer = layers[idx];
+    //const data = layerData[idx];
+    console.log(`SET ${layer.id}`);
+    const layerCallbacks = {
+      onSetLayerDomain: (val) => this._onLayerSetDomain(idx, val),
+    };
+    // Layer is Layer class
+    const layerOverlay = layer.renderLayer({
+      idx,
+      layerCallbacks,
+      mapState,
+    });
+    return overlays.concat(layerOverlay || []);
+  };
+
+  _renderDeckOverlay(layersToRender) {
+    const {
+      mapState,
+      mapStyle,
+      layerData,
+      layerOrder,
+      layers,
+      visStateActions,
+      mapboxApiAccessToken,
+      mapboxApiUrl,
+    } = this.props;
+
+    let deckGlLayers = [];
+    // wait until data is ready before render data layers
+    if (layers /*layerData && layerData.length*/) {
+      // last layer render first
+      deckGlLayers = [0]
+        //.slice()
+        //.reverse()
+        .filter((idx) => {
+          //console.log(`${layers[idx].overlayType}`);
+          return (
+            layers[idx].overlayType === OVERLAY_TYPE.deckgl &&
+            layersToRender[layers[idx].id]
+          );
+        })
+        .reduce(this._renderLayer, []);
+    }
+    console.log(`DECKGL LAYERS: ${deckGlLayers.length}`);
+
+    return (
+      <DeckGL
+        {...this.props.deckGlProps}
+        viewState={mapState}
+        height="100%"
+        width="100%"
+        id="default-deckgl-overlay"
+        layers={deckGlLayers}
+        //onBeforeRender={this._onBeforeRender}
+        onHover={visStateActions.onLayerHover}
+        onClick={visStateActions.onLayerClick}
+        ref={(comp) => {
+          if (comp && comp.deck && !this._deck) {
+            this._deck = comp.deck;
+          }
+        }}
+      />
+    );
+  }
   render() {
     const {
       mapState,
@@ -126,6 +199,8 @@ class MapContainer extends Component {
       height,
       width,
     } = this.props;
+
+    const layersToRender = this.layersToRenderSelector(this.props);
 
     const mapProps = {
       ...mapState,
@@ -144,7 +219,9 @@ class MapContainer extends Component {
         key="bottom"
         ref={this._setMapboxMap}
         mapStyle={mapStyle.mapStyles.dark.url}
-      ></MapComponent>
+      >
+        // {this._renderDeckOverlay(layersToRender)}
+      </MapComponent>
     );
   }
 }

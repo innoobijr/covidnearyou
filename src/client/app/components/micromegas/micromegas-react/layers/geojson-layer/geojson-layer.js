@@ -1,7 +1,7 @@
 import { uniq } from "lodash";
 import { DATA_TYPES } from "type-analyzer";
 
-import Layer, { colorMaker } from "../base-layer";
+import Layer, { colorMaker, OVERLAY_TYPE } from "../base-layer";
 import { GeoJsonLayer as DeckGLGeoJsonLayer } from "@deck.gl/layers";
 import { hexToRgb } from "../../utils/color-utils";
 import {
@@ -57,12 +57,18 @@ export default class GeoJsonLayer extends Layer {
   constructor(props) {
     super(props);
 
+    //this.overlayType = () => OVERLAY_TYPE.deckgl;
+    // this.type = OVERLAY_TYPE.deckgl;
     this.dataToFeature = [];
     this.registerVisConfig(geojsonVisConfigs);
     this.getPositionAccessor = () => featureAccessor(this.config.columns);
   }
   get type() {
     return "geojson";
+  }
+
+  get overlayType() {
+    return OVERLAY_TYPE.deckgl;
   }
 
   get name() {
@@ -386,17 +392,17 @@ export default class GeoJsonLayer extends Layer {
         radiusField: this.config.radiusField,
         radiusRange: visConfig.radiusRange,
       },
-      getFilterValue: gpuFilter.filterValueUpdateTriggers,
+      //getFilterValue: gpuFilter.filterValueUpdateTriggers,
     };
 
-    const defaultLayerProps = this.getDefaultDeckLayerProps(opts);
+    //const defaultLayerProps = this.getDefaultDeckLayerProps(opts);
     const opaOverwrite = {
       opacity: visConfig.strokeOpacity,
     };
 
     return [
       new DeckGLGeoJsonLayer({
-        ...defaultLayerProps,
+        //...defaultLayerProps,
         ...layerProps,
         ...data,
         highlightColor: HIGHLIGH_COLOR_3D,
