@@ -37,8 +37,8 @@ collections:
     editor:
       preview: false
     fields:
-      - { label: Name, name: name, widget: string }
-      - { label: Bio, name: bio, widget: string }
-      - { label: Featured, name: featured, widget: boolean, default: false }
-      - { label: Avatar, name: avatar, widget: image }
-      - { label: Social, name: social, widget: list, collapsed: false, field: { label: URL, name: url, widget: string } }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Bio", name: "bio", widget: "string" }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - { label: "Avatar", name: "avatar", widget: "image" }
+      - { label: "Social", name: "social", widget: "list", collapsed: false, field: { label: "URL", name: "url", widget: "string" } }
