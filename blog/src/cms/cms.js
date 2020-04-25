@@ -5,7 +5,7 @@ CMS.registerWidget([Widget()]);
 
 CMS.registerEditorComponent(
   {
-    id: "iframe",
+    id: "iframe-tag",
     label: "Iframe",
     fields: [{ name: "id", label: "Embed Link", widget: "string" }],
     widget: "iframe",
