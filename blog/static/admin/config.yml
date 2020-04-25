@@ -2,13 +2,24 @@ backend: # Set up your backend
   name: git-gateway
   branch: blog-dev
 
-#local_backend: true # Optional if you want to use the local proxy mode
+  #local_backend: true # Optional if you want to use the local proxy mode
 
 publish_mode: editorial_workflow
 media_folder: media    # I'm not using these default media directories at the moment.
 public_folder: /media
 
 collections:
+  - name: "tags"
+    label: "Tags"
+    folder: "/blog/content/tags/tags"
+    create: true
+    delete: true
+    format: "yml"
+    identifier_field: "name"
+    editor:
+      preview: false
+    fields:
+      - { label: 'Name', name: "name", widget: "string" }
   - name: "posts"
     label: "Posts"
     folder: "/blog/content/posts"
@@ -23,6 +34,7 @@ collections:
       - { label: "Author", name: "author", widget: "relation", collection: "authors", valueField: "name", searchFields: ["name"] }
       - { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false }
       - { label: "Excerpt", name: "excerpt", widget: "string", required: false }
+      - { label: "Tags", name: "tags", widget: "relation", collection: "tags", valueField: "name", searchFields: ["name"], multiple: true}
       - { label: "Hero", name: "hero", widget: "image" }
       - { label: "Body", name: "body", widget: "markdown" }
         #- { label: "Prez", name: "prez", widget: "slides", separator: "\n\n<!--s-->\n\n"}
