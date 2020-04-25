@@ -1,7 +1,7 @@
 import CMS from "netlify-cms-app";
-import IframeCMSWidget from "../components/widgets/iframe";
+import { Widget } from "../components/widgets/iframe";
 
-CMS.registerWidget([IframeCMSWidget.Widget()]);
+CMS.registerWidget([Widget()]);
 
 CMS.registerEditorComponent(
   {
