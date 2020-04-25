@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 export default class IframeControl extends React.Component {
   static propTypes = {
-    onChange: PropTypes.func.isRequired,
-    forID: PropTypes.string,
+    //onChange: PropTypes.func.isRequired,
+    //forID: PropTypes.string,
     value: PropTypes.node,
   };
 
@@ -13,14 +13,14 @@ export default class IframeControl extends React.Component {
   };
 
   render() {
-    const { forID, value, onChange } = this.props;
+    const { value } = this.props;
 
     return (
       <iframe
         src={value.id}
-        width={value.width}
-        height={value.height}
-        allow={value.allow}
+        //width={value.width}
+        //height={value.height}
+        //allow={value.allow}
       />
     );
   }
