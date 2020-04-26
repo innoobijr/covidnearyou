@@ -45,6 +45,10 @@ module.exports = {
         },
       },
     },
+    //{
+      //resolve: `gatsby-plugin-mdx`,
+      //options: {}
+    //},
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
