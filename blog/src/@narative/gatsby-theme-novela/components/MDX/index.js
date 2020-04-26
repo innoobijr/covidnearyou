@@ -45,16 +45,17 @@ const shortcodes = {
   figcaption: Figcaption,
   iframe: IframePreview };
 
-export default function MDX({ content, children, ...props }) {
+export default function MDX(cos) {
+  //const [content, children, ...props] = d;
   //const [colorMode] = useColorMode();
-  const context = useThemeUI();
-  const { theme, colorMode, setColorMode } = context;
-  console.log(JSON.stringify(theme.colors));
+  //const context = useThemeUI();
+  //const { theme, colorMode, setColorMode } = context;
+  //console.log(JSON.stringify(Object.keys(cos)));
   return (
     <MDXProvider components={shortcodes}>
-    <MDXBody theme={theme}>
-      <MDXRenderer isDark={colorMode === "dark"} {...props}>{content}</MDXRenderer>
-      {children}
+    <MDXBody>
+      <MDXRenderer isDark={true} {...cos.props}>{cos.content}</MDXRenderer>
+      {cos.children}
       </MDXBody>
     </MDXProvider>
   );

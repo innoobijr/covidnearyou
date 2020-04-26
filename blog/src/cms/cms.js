@@ -16,7 +16,7 @@ CMS.registerEditorComponent({
     };
   },
   toBlock: function(obj) {
-    return "<iframe " + obj.id; + " />"
+    return "<iframe " + obj.id + " />";
   },
   toPreview: function(obj) {
     return <IframePreview obj />;
