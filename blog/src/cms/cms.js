@@ -4,22 +4,20 @@ import IframePreview from "../components/widgets/iframe/IframePreview";
 
 //CMS.registerWidget("iframe", IframeControl, IframePreview);
 
-CMS.registerEditorComponent(
-  {
-    id: "iframe",
-    label: "Iframe Tag",
-    fields: [{ name: "id", label: "Embed Link", widget: "string" }],
-    pattern: /^iframe (\S+)$/,
-	  fromBlock: function (match) {
+CMS.registerEditorComponent({
+  id: "iframe",
+  label: "Iframe Tag",
+  fields: [{ name: "id", label: "Embed Link", widget: "string" }],
+  pattern: /^iframe (\S+)$/,
+  fromBlock: function(match) {
     return {
       id: match[1],
     };
   },
-  toBlock: function (obj) {
+  toBlock: function(obj) {
     return "iframe " + obj.id;
   },
-  toPreview: function (obj) {
+  toPreview: function(obj) {
     return <IframePreview obj />;
   },
-}*/
-);
+});
