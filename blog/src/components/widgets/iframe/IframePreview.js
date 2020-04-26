@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-export default function IframePreview({ value }) {
-  return `<iframe src=${value.id} width="100%" height="auto"/>`;
+export default function IframePreview({ id }) {
+  return `<iframe src=${id} width="100%" height="auto"/>`;
 }
 
 IframePreview.protoTypes = {
-  value: PropTypes.node,
+  id: PropTypes.string,
 };

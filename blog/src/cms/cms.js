@@ -2,16 +2,15 @@ import CMS from "netlify-cms-app";
 import IframeControl from "../components/widgets/iframe/IframeControl";
 import IframePreview from "../components/widgets/iframe/IframePreview";
 
-CMS.registerWidget("iframe", IframeControl, IframePreview);
+//CMS.registerWidget("iframe", IframeControl, IframePreview);
 
 CMS.registerEditorComponent(
   {
-    id: "iframe-tag",
+    id: "iframe",
     label: "Iframe Tag",
     fields: [{ name: "id", label: "Embed Link", widget: "string" }],
-    widget: "iframe",
-    //pattern: /^iframe (\S+)$/,
-  } /*fromBlock: function (match) {
+    pattern: /^iframe (\S+)$/,
+	  fromBlock: function (match) {
     return {
       id: match[1],
     };
@@ -20,7 +19,7 @@ CMS.registerEditorComponent(
     return "iframe " + obj.id;
   },
   toPreview: function (obj) {
-    return `<iframe src=${obj.id} width="100%" height="auto"/>`;
+    return <IframePreview obj />;
   },
 }*/
 );
