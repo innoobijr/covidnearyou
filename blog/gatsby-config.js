@@ -41,14 +41,17 @@ module.exports = {
         authorsPage: true,
         sources: {
           local: true,
-          // contentful: true,
+          //contentful: true,
         },
       },
     },
-    //{
-      //resolve: `gatsby-plugin-mdx`,
-      //options: {}
-    //},
+    /*({
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `b4ykkdtcgms3`,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      },
+    },*/
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

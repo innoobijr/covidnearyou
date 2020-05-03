@@ -20,6 +20,20 @@ collections:
       preview: false
     fields:
       - { label: 'Name', name: "name", widget: "string" }
+  - name: "jupyter"
+    label: "Jupyter"
+    path: "/blog/static/usr_meta"
+    create: true
+    delete: true
+    slug: "{{name}}"
+    formal: "yml"
+    public_folder: "/blog/static/jupyter"
+    identifier_field: "name"
+    editor:
+      preview: false
+    fields:
+      - { label: 'Name', name: 'name', widget: 'relation', collection: 'authors', valueField: 'name', searchFields: ["name"]}
+      - { label: "Files", name: "files", widget: "file", media_library: { config : { multiple: true }}}
   - name: "posts"
     label: "Posts"
     folder: "/blog/content/posts"

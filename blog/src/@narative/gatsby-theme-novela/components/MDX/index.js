@@ -7,7 +7,6 @@ import mediaqueries from "@narative/gatsby-theme-novela/src/styles/media";
 import { toKebabCase } from "@narative/gatsby-theme-novela/src/utils";
 import styled from "@emotion/styled";
 //import { useColorMode } from "theme-ui";
-import { useThemeUI } from "theme-ui";
 
 import Anchor from "@narative/gatsby-theme-novela/src/components/Anchor";
 import Blockquote from "@narative/gatsby-theme-novela/src/components/Blockquote";

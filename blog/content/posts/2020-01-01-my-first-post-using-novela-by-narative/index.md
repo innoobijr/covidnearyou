@@ -17,7 +17,9 @@ My first post using `@narative/gatsby-theme-novela`. Novela is built by the team
 
 
 
-<iframe id="https://www.youtube.com/embed/JtBmUxz4GsM"/>
+<iframe id="https://www.youtube.com/embed/JtBmUxz4GsM" title="frame1" allow="accelerometer;autoplay;encrypted-media;gyroscope;picture-in-picture" src="/img/hero.jpg"/>
+
+<img src="images/hero.jpg" />
 
 # H1
 
