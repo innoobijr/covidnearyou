@@ -32,6 +32,14 @@ module.exports = {
     ],
   },
   plugins: [
+    `gatsby-transformer-yaml`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `jupyter`,
+        path: `./static/jupyter`,
+      },
+    },
     {
       resolve: "@narative/gatsby-theme-novela",
       options: {

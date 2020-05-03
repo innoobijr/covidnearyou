@@ -22,12 +22,13 @@ collections:
       - { label: 'Name', name: "name", widget: "string" }
   - name: "jupyter"
     label: "Jupyter"
-    folder: "/blog/static/usr_meta"
+    folder: "/blog/content/usr_meta/usr_meta"
     create: true
     delete: true
     slug: "{{name}}"
-    formal: "yml"
+    format: "yml"
     public_folder: "/blog/static/jupyter"
+    media_folder: "/blog/static/jupyter"
     path: "{{slug}}"
     identifier_field: "name"
     editor:
